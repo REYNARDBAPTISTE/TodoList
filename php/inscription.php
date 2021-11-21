@@ -11,11 +11,11 @@
 
         $message = 'Ok';
 
-        $sql = "SELECT mail FROM membres where mail = '$email'";
+        $sql = "SELECT emailU FROM user where emailU = '$email'";
         $rs = $CO->query($sql);
         $error_email = $rs->num_rows;
 
-        $sql = "SELECT login FROM membres where login = '$login'";
+        $sql = "SELECT loginU FROM user where loginU = '$login'";
         $rs = $CO->query($sql);
         $error_login = $rs->num_rows;
 
@@ -26,7 +26,7 @@
         if ($message == 'Ok')
         {
             $password = password_hash($pwd,PASSWORD_ARGON2I);
-            $sql = "INSERT INTO membres (mail, login, mdp) VALUES ('$email','$login','$password')";
+            $sql = "INSERT INTO user (emailU, loginU, passwordU) VALUES ('$email','$login','$password')";
             $CO->query($sql);
         }
         echo $message;
