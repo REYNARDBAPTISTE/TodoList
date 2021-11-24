@@ -61,6 +61,9 @@ public class RegisterActivity extends AppCompatActivity {
         else if (!pwd.equals(pwdConfirm)){
             Toast.makeText(getApplicationContext(), "Les mots de passe ne sont pas identiques", Toast.LENGTH_SHORT).show();
         }
+        else if (!StringUtils.contains(email,"@")||(!StringUtils.contains(email,"."))){
+            Toast.makeText(getApplicationContext(), "Veuillez saisir une adresse mail valide", Toast.LENGTH_SHORT).show();
+        }
         else{
             stringRequest = new StringRequest(Request.Method.POST, DBPages.register_url, new Response.Listener<String>() {
                 @Override
