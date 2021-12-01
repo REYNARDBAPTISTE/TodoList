@@ -13,6 +13,9 @@
         android:theme="@style/Theme.TodoList"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".AccueilActivity"
+            android:exported="false" />
+        <activity
             android:name=".RegisterActivity"
             android:exported="false" />
         <activity
