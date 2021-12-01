@@ -31,11 +31,13 @@ public class MainActivity extends AppCompatActivity {
     private EditText etPassword;
     private StringRequest stringRequest;
     private RequestQueue requestQueue;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        // SI UTILISATEUR DEJA CONNECTE ALORS STARTACTIVITY
         etEmail = (EditText) findViewById(R.id.etLogin);
         etPassword = (EditText) findViewById(R.id.etpassword);
         Button btnInscription = (Button) findViewById(R.id.btnInscription);
@@ -79,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onResponse(String response) {
                     if (StringUtils.contains(response, "Connecté")) {
-                        Intent intent = new Intent(getApplicationContext(),AccueilActivity.class);
+                        Intent intent = new Intent(getApplicationContext(),NavigationActivity.class);
                         startActivity(intent);
                         finish();
                     } else if (StringUtils.contains(response, "Mot de passe incorect")) {

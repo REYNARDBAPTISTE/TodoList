@@ -7,10 +7,10 @@
         <item
             android:id="@+id/nav_home"
             android:icon="@drawable/gear"
-            android:title="Paramètre" />
+            android:title="Accueil" />
         <item
             android:id="@+id/nav_gallery"
             android:icon="@drawable/logout"
-            android:title="Déconnexion" />
+            android:title="Paramètre" />
     </group>
 </menu>
