@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ui.home.HomeFragment">
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Modifier les paramètres de votre compte"
+            android:textSize="20dp"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="center"
+        android:layout_marginTop="25dp">
+        <ImageView
+            android:id="@+id/imgAvatar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/avatar_login" />
+        <Button
+            android:id="@+id/btnModifierAvatar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="importer"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Votre login :"/>
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etLoginParams"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Votre login"
+                android:inputType="text" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="5dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Votre email :"/>
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etEmailParams"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Votre Email"
+            android:inputType="textEmailAddress" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="5dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Votre nom:"/>
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etNomParams"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Saisir votre nom"
+            android:inputType="text" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="5dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Votre prenom:"/>
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etPrenomParams"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Saisir votre Prenom"
+            android:inputType="text" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="25dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ancien Mot de passe:"/>
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etPassParams"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Saisir votre ancien mot de passe"
+            android:inputType="text" />
+
+    </LinearLayout>
+    <Button
+        android:id="@+id/btnModifierCompte"
+        android:layout_marginTop="15dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="Modifier votre compte"/>
+</LinearLayout>
