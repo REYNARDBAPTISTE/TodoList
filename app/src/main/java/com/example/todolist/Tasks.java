@@ -44,6 +44,15 @@ public class Tasks {
 
     public void setPrio(int prio) {this.prio = prio;}
 
+    public int getIdU() {
+        return idU;
+    }
+
+    public void setIdU(int idU) {
+        this.idU = idU;
+    }
+
+
     int idT;
     String titreT;
     String descT;
@@ -51,6 +60,9 @@ public class Tasks {
     int tempsR;
     int calcul;
     int prio;
+
+
+    int idU;
 
     public Tasks(int idT, String titreT,int limiteT){
         this.idT = idT;
@@ -76,5 +88,13 @@ public class Tasks {
         this.limiteT = limiteT;
         this.calcul = calcul;
         this.prio = prio;
+    }
+    public Tasks(int idT, String titreT, String descT, int tempsR, int limiteT, int idU){
+        this.idT = idT;
+        this.titreT = titreT;
+        this.descT = descT;
+        this.tempsR = tempsR;
+        this.limiteT = limiteT;
+        this.idU = idU;
     }
 }
