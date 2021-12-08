@@ -15,12 +15,20 @@ public class DBManager extends SQLiteOpenHelper {
     }
 
     @Override
-    public void onCreate(SQLiteDatabase sqLiteDatabase) {
-
+    public void onCreate(SQLiteDatabase db) {
+        String sqlU= "CREATE TABLE User(idU int, emailU String, loginU String, nameU String, first_nameU String, passwordU String)";
+        db.execSQL(sqlU);
+        String sqlT = "CREATE TABLE Task(idT int, titreT String not null, descT String, creationT int, limiteT int not null,prio String, idU int, PRIMARY KEY(idT), FOREIGN KEY(idU) REFERENCES User(idU))";
+        db.execSQL(sqlT);
     }
 
     @Override
-    public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 
+        String sqlU ="DROP TABLE User";
+        db.execSQL(sqlU);
+        String sqlUT = "DROP TABLE Task";
+        db.execSQL(sqlUT);
+        this.onCreate(db);
     }
 }
