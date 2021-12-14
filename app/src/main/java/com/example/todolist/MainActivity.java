@@ -130,8 +130,10 @@ public class MainActivity extends AppCompatActivity {
                 for (int i = 0; i < response.length(); i++) {
                     try {
                         jsonObject = response.getJSONObject(i);
-                        Users unUser = new Users(jsonObject.getInt("idU"), jsonObject.getString("emailU"), jsonObject.getString("loginU"), jsonObject.getString("nameU"), jsonObject.getString("first_nameU"), jsonObject.getString("passwordU"));
-                        dbm.UserAdd(unUser.idU,unUser.emailU,unUser.loginU,unUser.nameU,unUser.first_nameU,unUser.passwordU);
+                        //Users unUser = new Users(jsonObject.getInt("idU"), jsonObject.getString("emailU"), jsonObject.getString("loginU"), jsonObject.getString("nameU"), jsonObject.getString("first_nameU"), jsonObject.getString("passwordU"));
+                        //dbm.UserAdd(unUser.idU,unUser.emailU,unUser.loginU,unUser.nameU,unUser.first_nameU,unUser.passwordU);
+                        Users unUser = new Users(jsonObject.getInt("idU"),jsonObject.getString("emailU"),jsonObject.getString("loginU"),jsonObject.getString("passwordU"));
+                        dbm.UserAddTest(unUser.idU,unUser.emailU, unUser.loginU, unUser.passwordU);
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }

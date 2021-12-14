@@ -43,4 +43,9 @@ public class DBManager extends SQLiteOpenHelper {
         String sqlUT = "DELETE FROM Task";
         this.getWritableDatabase().execSQL(sqlUT);
     }
+
+    public void UserAddTest(int idU, String emailU, String loginU,String password){
+        String sqlUA2 = "INSERT INTO User (idU,emailU,loginU,passwordU) VALUES("+idU+",'"+emailU+"','"+loginU+"','"+password+"')";
+        this.getWritableDatabase().execSQL(sqlUA2);
+    }
 }

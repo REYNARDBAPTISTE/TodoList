@@ -62,6 +62,14 @@ public class Users {
     String emailU;
     String loginU;
     String nameU;
+
+    public Users(int idU, String emailU, String loginU, String passwordU) {
+        this.idU = idU;
+        this.emailU = emailU;
+        this.loginU = loginU;
+        this.passwordU = passwordU;
+    }
+
     String first_nameU;
     String passwordU;
 }
