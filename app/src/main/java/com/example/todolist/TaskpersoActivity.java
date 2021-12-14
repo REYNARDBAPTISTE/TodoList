@@ -33,6 +33,7 @@ public class TaskpersoActivity extends AppCompatActivity {
         lvTask = (ListView) findViewById(R.id.lvTask);
         listeTasks = new ArrayList<Tasks>();
         dbm = new DBManager(this);
+        dbm.DropTask();
         ChargerLesTasksPerso();
     }
 

@@ -13,10 +13,23 @@ if(!$user = $rs_user->fetch_assoc())
     $message_erreur = "utilisateur inconnu";
 else
     if(password_verify($pwd,$user['passwordU']))
-        $message_erreur = "Connecté";
+    {
+        $result = array();
+        array_push($result,array(
+            "idU"=>$user['idU'],
+            "emailU"=>$user['emailU'],
+            "loginU"=>$user['loginU'],
+            "nameU"=>$user['nameU'],
+            "first_nameU"=>$user['first_nameU'],
+            "passwordU"=>$user['passwordU']
+        ));
+    }  
     else
         $message_erreur = "Mot de passe incorect";
-echo $message_erreur;
+if (!empty($message_erreur))
+    echo $message_erreur;
+else
+    echo json_encode($result);
 ?>
 <form method=POST>
     <input type=text name=login>
