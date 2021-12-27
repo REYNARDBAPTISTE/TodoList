@@ -1,6 +1,13 @@
 package com.example.todolist;
 
 public class Tasks {
+    public Tasks(int idT, String titreT, int creationT, int limiteT) {
+        this.idT = idT;
+        this.titreT=titreT;
+        this.tempsR=creationT;
+        this.limiteT=limiteT;
+    }
+
     public int getIdT() {
         return idT;
     }

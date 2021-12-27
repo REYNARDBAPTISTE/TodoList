@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        dbm = new DBManager(this);
+        //dbm = new DBManager(this);
         // SI UTILISATEUR DEJA CONNECTE ALORS STARTACTIVITY
         etEmail = (EditText) findViewById(R.id.etLogin);
         etPassword = (EditText) findViewById(R.id.etpassword);
@@ -96,7 +96,7 @@ public class MainActivity extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(), "L'utilisateur est inconnu", Toast.LENGTH_SHORT).show();
                     }
                     else {
-                        AddUser();
+                        //AddUser();
                         Intent intent = new Intent(getApplicationContext(), NavigationActivity.class);
                         startActivity(intent);
                         finish();
@@ -122,7 +122,7 @@ public class MainActivity extends AppCompatActivity {
             requestQueue.add(stringRequest);
         }
     }
-    public void AddUser(){
+    /*public void AddUser(){
         jsonArrayRequest = new JsonArrayRequest(DBPages.login_url, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
@@ -133,7 +133,7 @@ public class MainActivity extends AppCompatActivity {
                         //Users unUser = new Users(jsonObject.getInt("idU"), jsonObject.getString("emailU"), jsonObject.getString("loginU"), jsonObject.getString("nameU"), jsonObject.getString("first_nameU"), jsonObject.getString("passwordU"));
                         //dbm.UserAdd(unUser.idU,unUser.emailU,unUser.loginU,unUser.nameU,unUser.first_nameU,unUser.passwordU);
                         Users unUser = new Users(jsonObject.getInt("idU"),jsonObject.getString("emailU"),jsonObject.getString("loginU"),jsonObject.getString("passwordU"));
-                        dbm.UserAddTest(unUser.idU,unUser.emailU, unUser.loginU, unUser.passwordU);
+                        dbm.UserAdd(unUser.idU,unUser.emailU, unUser.loginU, unUser.passwordU);
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
@@ -147,5 +147,5 @@ public class MainActivity extends AppCompatActivity {
         });
         requestQueueJson = Volley.newRequestQueue(MainActivity.this);
         requestQueueJson.add(jsonArrayRequest);
-    }
+    }*/
 }
