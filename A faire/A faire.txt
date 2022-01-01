@@ -1,0 +1,24 @@
+Mot de passe oublié
+Validation de l'email
+
+Section paramètre (à modifier pour votre compte)
+	-> Modifier l'email
+	-> Modifier ou Ajouter le Nom
+	-> Modifier ou Ajouter le prénom
+	-> Vérifier si l'ancien mot de passe correspond pour modification
+
+Ajouter Section sécurité
+	-> Modification de mot de passe
+
+Ajouter un section professionel
+	-> Bouton rejoindre un groupe
+	-> Bouton créer un groupe
+
+Section perso
+	-> Afficher les tâches
+
+Section créer une nouvellle tâche
+	-> Entrer un titre
+	-> Entre une description
+	-> Entrer une priorité
+	-> Entrer une temps limite

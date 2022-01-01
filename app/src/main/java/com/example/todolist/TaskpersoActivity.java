@@ -3,7 +3,10 @@ package com.example.todolist;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -30,6 +33,7 @@ public class TaskpersoActivity extends AppCompatActivity {
     private ArrayList<Users> listeUser;
     private ListView lvTask;
     private DBManager dbm;
+    private Button btnCreateTask;
     private StringRequest stringRequest;
     private RequestQueue requestQueue2;
     private JsonArrayRequest jsonArrayRequest;
@@ -42,11 +46,35 @@ public class TaskpersoActivity extends AppCompatActivity {
         lvTask = (ListView) findViewById(R.id.lvTask);
         listeTasks = new ArrayList<Tasks>();
         dbm = new DBManager(this);
-        listeUser = dbm.lectureU();
-        dbm.DropTask();
-        EnvoieidU();
+        listeTasks = new DBManager(this).lectureTask();
+        lvTask = (ListView) findViewById(R.id.lvTask);
+        btnCreateTask = (Button) findViewById(R.id.btnCreateTask);
+
+        btnCreateTask.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                toCreate();
+            }
+        });
+        //listeUser = dbm.lectureU();
+        //dbm.DropTask();
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        ListeAdapterT listeAdapterT = new ListeAdapterT(this,listeTasks);
+        lvTask.setAdapter(listeAdapterT);
+    }
+
+    public void toCreate() {
+        Intent intent = new Intent (this, CreateTaskActivity.class);
+        listeUser = dbm.lectureU();
+        intent.putExtra("idU",listeUser.indexOf(0));
+        this.startActivity(intent);
+        finish();
+    }
+    //NON FONCTIONNEL
     public void ChargerLesTasksPerso(){
         jsonArrayRequest = new JsonArrayRequest(DBPages.tasks_url, new Response.Listener<JSONArray>() {
             @Override
