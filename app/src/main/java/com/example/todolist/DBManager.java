@@ -14,7 +14,7 @@ import java.util.Date;
 
 public class DBManager extends SQLiteOpenHelper {
     private static final String DATABASE_NAME="TodoList.db";
-    private static final int DATABASE_VERSION = 7;
+    private static final int DATABASE_VERSION = 10;
 
     public DBManager(@Nullable Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -26,11 +26,11 @@ public class DBManager extends SQLiteOpenHelper {
         db.execSQL(sqlU);
         String sqlUT = "INSERT INTO User (idU) VALUES (16)";
         db.execSQL(sqlUT);
-        String sqlT = "CREATE TABLE Task(idT int, titreT String, descT String, creationT int, limiteT int,idU int,prio String, PRIMARY KEY(idT))";
+        String sqlT = "CREATE TABLE Task(idT int, titreT String, descT String, creationT int, limiteT int,idU int,prio int, PRIMARY KEY(idT))";
         db.execSQL(sqlT);
-        String sqlTsk1 = "INSERT INTO Task(idT,titreT,descT,creationT,limiteT) VALUES (1,'titre1','desc1',1,20)";
-        String sqlTsk2 = "INSERT INTO Task(idT,titreT,descT,creationT,limiteT) VALUES (2,'titre2','desc2',1,25)";
-        String sqlTsk3 = "INSERT INTO Task(idT,titreT,descT,creationT,limiteT) VALUES (3,'titre3','desc3',1,30)";
+        String sqlTsk1 = "INSERT INTO Task(idT,titreT,descT,creationT,limiteT,prio) VALUES (1,'titre1','desc1',1,20,2)";
+        String sqlTsk2 = "INSERT INTO Task(idT,titreT,descT,creationT,limiteT,prio) VALUES (2,'titre2','desc2',1,25,2)";
+        String sqlTsk3 = "INSERT INTO Task(idT,titreT,descT,creationT,limiteT,prio) VALUES (3,'titre3','desc3',1,30,2)";
         db.execSQL(sqlTsk1);
         db.execSQL(sqlTsk2);
         db.execSQL(sqlTsk3);
@@ -86,6 +86,8 @@ public class DBManager extends SQLiteOpenHelper {
             listeTask.add(uneTask);
             cursor.moveToNext();
         }
+        listeTask.sort((o1,o2) -> Integer.valueOf(o1.calcul).compareTo(Integer.valueOf(o2.calcul)));
+        listeTask.sort((o1,o2) -> Integer.valueOf(o1.prio).compareTo(Integer.valueOf(o2.prio)));
         return listeTask;
     }
 
