@@ -37,15 +37,13 @@ public class MainActivity extends AppCompatActivity {
     private DBManager dbm;
     private StringRequest stringRequest;
     private RequestQueue requestQueue;
-    private JsonArrayRequest jsonArrayRequest;
-    private RequestQueue requestQueueJson;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        //dbm = new DBManager(this);
+        dbm = new DBManager(this);
         // SI UTILISATEUR DEJA CONNECTE ALORS STARTACTIVITY
         etEmail = (EditText) findViewById(R.id.etLogin);
         etPassword = (EditText) findViewById(R.id.etpassword);
@@ -58,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
         btnMdpOublie.setBackgroundColor(Color.WHITE);
         btnMdpOublie.setTextColor(Color.BLACK);
         btnMdpOublie.setOutlineSpotShadowColor(Color.WHITE);
-
+        //dbm.DropUser();
         // PAGE D'INSCRIPTION
         btnInscription.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -66,6 +64,8 @@ public class MainActivity extends AppCompatActivity {
                 StartActivityRegister();
             }
         });
+
+        //PAGE DE CONNECTION
         btnConnexion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -96,13 +96,24 @@ public class MainActivity extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(), "L'utilisateur est inconnu", Toast.LENGTH_SHORT).show();
                     }
                     else {
-                        //AddUser();
-                        Intent intent = new Intent(getApplicationContext(), NavigationActivity.class);
-                        startActivity(intent);
-                        finish();
-                    }
+                        try {
+                            JSONArray j = new JSONArray(response);
+                            for (int i = 0; i < response.length(); i++) {
+                                JSONObject object = j.getJSONObject(i);
+                                Users unUser = new Users(object.getInt("idU"), object.getString("emailU"), object.getString("loginU"), object.getString("nameU"),
+                                        object.getString("first_nameU"), object.getString("passwordU"));
+                                dbm.UserAdd(unUser.idU, unUser.emailU, unUser.loginU, unUser.nameU,unUser.first_nameU,unUser.passwordU);
+
+                                Intent intent = new Intent(getApplicationContext(), NavigationActivity.class);
+                                startActivity(intent);
+                                finish();
+                            }
+                        }
+                        catch (JSONException e) {
+                            e.printStackTrace();
+                        }
                 }
-            }, new Response.ErrorListener() {
+            }}, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
                     Toast.makeText(getApplicationContext(), error.toString().trim(), Toast.LENGTH_SHORT).show();
@@ -122,30 +133,4 @@ public class MainActivity extends AppCompatActivity {
             requestQueue.add(stringRequest);
         }
     }
-    /*public void AddUser(){
-        jsonArrayRequest = new JsonArrayRequest(DBPages.login_url, new Response.Listener<JSONArray>() {
-            @Override
-            public void onResponse(JSONArray response) {
-                JSONObject jsonObject = null;
-                for (int i = 0; i < response.length(); i++) {
-                    try {
-                        jsonObject = response.getJSONObject(i);
-                        //Users unUser = new Users(jsonObject.getInt("idU"), jsonObject.getString("emailU"), jsonObject.getString("loginU"), jsonObject.getString("nameU"), jsonObject.getString("first_nameU"), jsonObject.getString("passwordU"));
-                        //dbm.UserAdd(unUser.idU,unUser.emailU,unUser.loginU,unUser.nameU,unUser.first_nameU,unUser.passwordU);
-                        Users unUser = new Users(jsonObject.getInt("idU"),jsonObject.getString("emailU"),jsonObject.getString("loginU"),jsonObject.getString("passwordU"));
-                        dbm.UserAdd(unUser.idU,unUser.emailU, unUser.loginU, unUser.passwordU);
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getApplicationContext(), error.toString().trim(), Toast.LENGTH_SHORT).show();
-            }
-        });
-        requestQueueJson = Volley.newRequestQueue(MainActivity.this);
-        requestQueueJson.add(jsonArrayRequest);
-    }*/
 }

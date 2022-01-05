@@ -14,7 +14,7 @@ import java.util.Date;
 
 public class DBManager extends SQLiteOpenHelper {
     private static final String DATABASE_NAME="TodoList.db";
-    private static final int DATABASE_VERSION = 10;
+    private static final int DATABASE_VERSION = 2;
 
     public DBManager(@Nullable Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -24,16 +24,8 @@ public class DBManager extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         String sqlU= "CREATE TABLE User(idU int, emailU String, loginU String, nameU String, first_nameU String, passwordU String)";
         db.execSQL(sqlU);
-        String sqlUT = "INSERT INTO User (idU) VALUES (16)";
-        db.execSQL(sqlUT);
-        String sqlT = "CREATE TABLE Task(idT int, titreT String, descT String, creationT int, limiteT int,idU int,prio int, PRIMARY KEY(idT))";
+        String sqlT = "CREATE TABLE Task(idT int, titreT String, descT String, creationT int, limiteT int,idU int,PRIMARY KEY(idT), FOREIGN KEY(idU) REFERENCES User(idU))";
         db.execSQL(sqlT);
-        String sqlTsk1 = "INSERT INTO Task(idT,titreT,descT,creationT,limiteT,prio) VALUES (1,'titre1','desc1',1,20,2)";
-        String sqlTsk2 = "INSERT INTO Task(idT,titreT,descT,creationT,limiteT,prio) VALUES (2,'titre2','desc2',1,25,2)";
-        String sqlTsk3 = "INSERT INTO Task(idT,titreT,descT,creationT,limiteT,prio) VALUES (3,'titre3','desc3',1,30,2)";
-        db.execSQL(sqlTsk1);
-        db.execSQL(sqlTsk2);
-        db.execSQL(sqlTsk3);
     }
 
     @Override
@@ -46,8 +38,8 @@ public class DBManager extends SQLiteOpenHelper {
         this.onCreate(db);
     }
 
-    public void TaskAdd(int idT, String titreT,int creationT, int limiteT) {
-        String sqlTA = "INSERT INTO Task (idT,titreT,creationT,limiteT) VALUES ("+idT+",'"+titreT+"',"+creationT+","+limiteT+")";
+    public void TaskAdd(int idT, String titreT,String descT,int creationT, int limiteT,int idU) {
+        String sqlTA = "INSERT INTO Task (idT,titreT,descT,creationT,limiteT,idU) VALUES ("+idT+",'"+titreT+"','"+descT+"',"+creationT+","+limiteT+","+idU+")";
         this.getWritableDatabase().execSQL(sqlTA);
     }
     public void UserAdd(int idU, String emailU, String loginU, String nameU, String first_nameU, String password){
@@ -55,8 +47,17 @@ public class DBManager extends SQLiteOpenHelper {
         this.getWritableDatabase().execSQL(sqlUA);
     }
     public void DropTask(){
-        String sqlUT = "DELETE FROM Task";
+        String sqlUT = "DROP TABLE IF EXISTS Task";
         this.getWritableDatabase().execSQL(sqlUT);
+        String sqlCT = "CREATE TABLE Task(idT int, titreT String, descT String, creationT int, limiteT int,idU int,PRIMARY KEY(idT), FOREIGN KEY(idU) REFERENCES User(idU))";
+        this.getWritableDatabase().execSQL(sqlCT);
+    }
+    public void DropUser(){
+        String sqlUU = "DROP TABLE IF EXISTS User";
+        this.getWritableDatabase().execSQL(sqlUU);
+        String sqlU= "CREATE TABLE User(idU int, emailU String, loginU String, nameU String, first_nameU String, passwordU String)";
+        this.getWritableDatabase().execSQL(sqlU);
+
     }
     public ArrayList<Users> lectureU(){
         ArrayList<Users> listeUser = new ArrayList<Users>();
@@ -81,13 +82,11 @@ public class DBManager extends SQLiteOpenHelper {
             String formattedDate = df.format(currentTime);
             int tempsActu =  Integer.parseInt(formattedDate);
             int restant = limite - tempsActu;
-            int prio = 0;
-            Tasks uneTask = new Tasks(cursor.getInt(0), cursor.getString(1), cursor.getString(2),creation,limite,restant,prio);
+            Tasks uneTask = new Tasks(cursor.getInt(0), cursor.getString(1), cursor.getString(2),creation,limite,restant);
             listeTask.add(uneTask);
             cursor.moveToNext();
         }
         listeTask.sort((o1,o2) -> Integer.valueOf(o1.calcul).compareTo(Integer.valueOf(o2.calcul)));
-        listeTask.sort((o1,o2) -> Integer.valueOf(o1.prio).compareTo(Integer.valueOf(o2.prio)));
         return listeTask;
     }
 
@@ -99,16 +98,15 @@ public class DBManager extends SQLiteOpenHelper {
         curseur.close();
         return nbT;
     }
-    public void CreateTask(String titreT, String descT, int nbjour, int prio,int idU) {
+    public void CreateTask(String titreT, String descT, int nbjour,int idU) {
         int nbT = this.CountTask();
         Date currentTime = Calendar.getInstance().getTime();
         SimpleDateFormat df = new SimpleDateFormat("DD");
         String formattedDate = df.format(currentTime);
         // CONTRÔLE D'ERREUR
         // -> AlertDialog
-        // INSERT INTO
 
-        String sqlTU = "INSERT INTO Task (idT, titreT, descT, creationT, limiteT,prio, idU) VALUES(" + nbT + ",'" + titreT + "','" + descT + "'," + formattedDate + "," + nbjour + "," + prio + "," + idU + ")";
+        String sqlTU = "INSERT INTO Task (idT, titreT, descT, creationT, limiteT, idU) VALUES(" + nbT + ",'" + titreT + "','" + descT + "'," + formattedDate + "," + nbjour + "," + idU + ")";
         this.getWritableDatabase().execSQL(sqlTU);
     }
 }

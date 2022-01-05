@@ -97,25 +97,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="25sp"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:text="Saisir la priorité de la tâche"
-            android:textSize="15dp" />
-        <Spinner
-            android:id="@+id/spPriorite"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:spinnerMode="dropdown">
-
-        </Spinner>
-
-    </LinearLayout>
+        android:orientation="horizontal"/>
 
     <Button
         android:id="@+id/btnValiderInscriptionT"

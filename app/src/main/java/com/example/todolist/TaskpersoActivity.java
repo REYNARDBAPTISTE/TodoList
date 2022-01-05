@@ -36,8 +36,6 @@ public class TaskpersoActivity extends AppCompatActivity {
     private Button btnCreateTask;
     private StringRequest stringRequest;
     private RequestQueue requestQueue2;
-    private JsonArrayRequest jsonArrayRequest;
-    private RequestQueue requestQueue;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,7 +44,6 @@ public class TaskpersoActivity extends AppCompatActivity {
         lvTask = (ListView) findViewById(R.id.lvTask);
         listeTasks = new ArrayList<Tasks>();
         dbm = new DBManager(this);
-        listeTasks = new DBManager(this).lectureTask();
         lvTask = (ListView) findViewById(R.id.lvTask);
         btnCreateTask = (Button) findViewById(R.id.btnCreateTask);
 
@@ -56,57 +53,36 @@ public class TaskpersoActivity extends AppCompatActivity {
                 toCreate();
             }
         });
-        //listeUser = dbm.lectureU();
-        //dbm.DropTask();
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        ListeAdapterT listeAdapterT = new ListeAdapterT(this,listeTasks);
-        lvTask.setAdapter(listeAdapterT);
+        ChargerTasks();
     }
 
     public void toCreate() {
         Intent intent = new Intent (this, CreateTaskActivity.class);
         listeUser = dbm.lectureU();
-        intent.putExtra("idU",listeUser.indexOf(0));
+        intent.putExtra("idU",listeUser.get(0).getIdU());
         this.startActivity(intent);
         finish();
     }
-    //NON FONCTIONNEL
-    public void ChargerLesTasksPerso(){
-        jsonArrayRequest = new JsonArrayRequest(DBPages.tasks_url, new Response.Listener<JSONArray>() {
-            @Override
-            public void onResponse(JSONArray response) {
-                JSONObject jsonObject = null;
-                for (int i = 0; i < response.length(); i++) {
-                    try {
-                        jsonObject = response.getJSONObject(i);
-                        Tasks uneTask = new Tasks(jsonObject.getInt("idT"), jsonObject.getString("titreT"),jsonObject.getInt("creationT"), jsonObject.getInt("limiteT"));
-                        dbm.TaskAdd(uneTask.idT,uneTask.titreT,uneTask.tempsR,uneTask.limiteT);
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getApplicationContext(), error.toString().trim(), Toast.LENGTH_SHORT).show();
-            }
-        }
-        );
-        requestQueue = Volley.newRequestQueue(TaskpersoActivity.this);
-        requestQueue.add(jsonArrayRequest);
-    }
 
-    public void EnvoieidU(){
-        String idU = listeUser.toString();
+    public void ChargerTasks(){
+        dbm.DropTask();
+        listeUser = dbm.lectureU();
+        String idU = String.valueOf(listeUser.get(0).getIdU());
         stringRequest = new StringRequest(Request.Method.POST, DBPages.tasks_url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                ChargerLesTasksPerso();
+                try {
+                    JSONArray j = new JSONArray(response);
+                    for (int i = 0; i < response.length(); i++) {
+                        JSONObject object = j.getJSONObject(i);
+                        Tasks uneTask = new Tasks(object.getInt("idT"), object.getString("titreT"), object.getString("descT"),object.getInt("creationT"), object.getInt("limiteT"),object.getInt("idU"));
+                        dbm.TaskAdd(uneTask.idT, uneTask.titreT, uneTask.descT, uneTask.tempsR,uneTask.limiteT,uneTask.idU);
+                        listeTasks.add(uneTask);
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                setAdapterTaches(listeTasks);
             }
         }, new Response.ErrorListener() {
             @Override
@@ -125,5 +101,10 @@ public class TaskpersoActivity extends AppCompatActivity {
         };
         requestQueue2 = Volley.newRequestQueue(TaskpersoActivity.this);
         requestQueue2.add(stringRequest);
+    }
+
+    private void setAdapterTaches(ArrayList<Tasks> listeTasks) {
+        ListeAdapterT listeAdapterT = new ListeAdapterT(this,listeTasks);
+        lvTask.setAdapter(listeAdapterT);
     }
 }

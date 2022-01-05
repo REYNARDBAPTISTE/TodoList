@@ -22,3 +22,5 @@ Section créer une nouvellle tâche
 	-> Entre une description
 	-> Entrer une priorité
 	-> Entrer une temps limite
+
+PROBLEME DOUBLE CLIQUE
