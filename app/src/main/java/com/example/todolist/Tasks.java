@@ -51,10 +51,6 @@ public class Tasks {
 
     public void setCalcul(int calcul) {this.calcul = calcul;}
 
-    public int Getprio() {return prio;}
-
-    public void setPrio(int prio) {this.prio = prio;}
-
     public int getIdU() {
         return idU;
     }
@@ -89,15 +85,14 @@ public class Tasks {
     public Tasks(){
 
     }
-
-    public Tasks(int idT, String titreT, String descT, int tempsR, int limiteT, int calcul, int prio){
+    public Tasks(int idT, String titreT, String descT, int tempsR, int limiteT, int idU, int calcul){
         this.idT = idT;
         this.titreT = titreT;
         this.descT = descT;
         this.tempsR = tempsR;
         this.limiteT = limiteT;
+        this.idU = idU;
         this.calcul = calcul;
-        this.prio = prio;
     }
     public Tasks(int idT, String titreT, String descT, int tempsR, int limiteT, int idU){
         this.idT = idT;

@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -54,8 +55,24 @@ public class TaskpersoActivity extends AppCompatActivity {
             }
         });
         ChargerTasks();
-    }
 
+        lvTask.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                startActivityModif(i);
+            }
+        });
+    }
+    public void startActivityModif(int i){
+        Intent intent = new Intent(this,Modif_task.class);
+        intent.putExtra("titre",listeTasks.get(i).getTitreT());
+        intent.putExtra("desc",listeTasks.get(i).getDescT());
+        intent.putExtra("limite",listeTasks.get(i).getLimiteT());
+        intent.putExtra("idT",listeTasks.get(i).getIdT());
+        intent.putExtra("idU",listeTasks.get(i).getIdU());
+        startActivity(intent);
+        finish();
+    }
     public void toCreate() {
         Intent intent = new Intent (this, CreateTaskActivity.class);
         listeUser = dbm.lectureU();

@@ -71,7 +71,7 @@ public class DBManager extends SQLiteOpenHelper {
     }
     public ArrayList<Tasks> lectureTask(){
         ArrayList<Tasks> listeTask = new ArrayList<>();
-        String sqlTL = "SELECT idT,titreT,descT,creationT,limiteT FROM Task";
+        String sqlTL = "SELECT idT,titreT,descT,creationT,limiteT,idU FROM Task";
         Cursor cursor = this.getReadableDatabase().rawQuery(sqlTL,null);
         cursor.moveToFirst();
         while (!cursor.isAfterLast()){
@@ -82,11 +82,10 @@ public class DBManager extends SQLiteOpenHelper {
             String formattedDate = df.format(currentTime);
             int tempsActu =  Integer.parseInt(formattedDate);
             int restant = limite - tempsActu;
-            Tasks uneTask = new Tasks(cursor.getInt(0), cursor.getString(1), cursor.getString(2),creation,limite,restant);
+            Tasks uneTask = new Tasks(cursor.getInt(0), cursor.getString(1), cursor.getString(2),creation,limite,cursor.getInt(5),restant);
             listeTask.add(uneTask);
             cursor.moveToNext();
         }
-        listeTask.sort((o1,o2) -> Integer.valueOf(o1.calcul).compareTo(Integer.valueOf(o2.calcul)));
         return listeTask;
     }
 

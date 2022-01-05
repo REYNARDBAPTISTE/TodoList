@@ -13,6 +13,9 @@
         android:theme="@style/Theme.TodoList"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".Modif_task"
+            android:exported="false" />
+        <activity
             android:name=".CreateTaskActivity"
             android:exported="false" />
         <activity

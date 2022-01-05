@@ -1,5 +1,6 @@
 package com.example.todolist;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -13,19 +14,29 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 public class CreateTaskActivity extends AppCompatActivity {
     private EditText etTitre;
     private EditText etDesc;
     private EditText etDate;
     private TextView tvError;
-    private String choixPrio;
-    private Spinner spChoixPriorite;
     private DBManager dbm;
     private Button btnValider;
+    private StringRequest stringRequest;
+    private RequestQueue requestQueue;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,16 +66,7 @@ public class CreateTaskActivity extends AppCompatActivity {
                     tvError.setText("Vous ne pouvez pas créer de tâche de plus de 360 jours");
                 }
                 else{
-                    Date currentTime = Calendar.getInstance().getTime();
-                    SimpleDateFormat df = new SimpleDateFormat("DD");
-                    String formattedDate = df.format(currentTime);
-                    int dateActu = Integer.parseInt(formattedDate);
-                    int dateLimite = Integer.parseInt(etDate.getText().toString());
-                    int nbjour = dateActu + dateLimite;
-                    int idU = intent.getIntExtra("idU",0);
-                    dbm.CreateTask(etTitre.getText().toString(),etDesc.getText().toString(),nbjour,idU);
-                    tvError.setText("Votre tâche a été créé");
-                    // PROBLEME DE RESTART PAGE
+                    AjoutBDD();
                     start();
                 }
             }
@@ -74,5 +76,45 @@ public class CreateTaskActivity extends AppCompatActivity {
         Intent intent = new Intent(this,TaskpersoActivity.class);
         startActivity(intent);
         finish();
+    }
+    public void AjoutBDD(){
+        Date currentTime = Calendar.getInstance().getTime();
+        SimpleDateFormat df = new SimpleDateFormat("DD");
+        String formattedDate = df.format(currentTime);
+        int dateActu = Integer.parseInt(formattedDate);
+        int dateLimite = Integer.parseInt(etDate.getText().toString());
+        int nbjour = dateActu + dateLimite;
+        String titre = etTitre.getText().toString();
+        String desc = etDesc.getText().toString();
+        int limiteT = nbjour;
+        Intent intent = getIntent();
+        int idU = intent.getIntExtra("idU",0);
+
+        stringRequest = new StringRequest(Request.Method.POST, DBPages.task_add_url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getApplicationContext(), error.toString().trim(), Toast.LENGTH_SHORT).show();
+            }
+        })
+        {
+            @Nullable
+            @Override
+            protected Map<String, String> getParams(){
+                Map<String,String> params = new HashMap<>();
+                params.put("titre",titre);
+                params.put("desc",desc);
+                params.put("creation", String.valueOf(dateActu));
+                params.put("limite", String.valueOf(limiteT));
+                params.put("id", String.valueOf(idU));
+                return params;
+            }
+        };
+        requestQueue = Volley.newRequestQueue(CreateTaskActivity.this);
+        requestQueue.add(stringRequest);
     }
 }

@@ -47,8 +47,7 @@ public class ListeAdapterT extends ArrayAdapter<Tasks> {
         int tempsDepart = uneTask.getTempsR();
         int tempsLimite = uneTask.getLimiteT();
         int tempsActu = Integer.parseInt(formattedDate);
-        int tempsRestant = uneTask.getCalcul();
-        int prio = uneTask.Getprio();
+        int tempsRestant = uneTask.getLimiteT() - uneTask.getTempsR();
         if (tempsActu < tempsDepart)
         {
             tempsActu = tempsActu + 365;
@@ -61,28 +60,28 @@ public class ListeAdapterT extends ArrayAdapter<Tasks> {
             tvDesc.setText(uneTask.getDescT() + " " +tempsRestant+" jours restants");
             tvDesc.setTextColor(Color.parseColor("#F00020"));
         }
-        else if (tempsRestant <= Math.round(tempsDepart * (1/4))||(prio == 1))
+        else if (tempsRestant <= Math.round(tempsDepart * (1/4)))
         {
             tvTitre.setText(uneTask.getTitreT());
             tvTitre.setTextColor(Color.parseColor("#F00020"));
             tvDesc.setText(uneTask.getDescT() + " " +tempsRestant+" jours restants");
             tvDesc.setTextColor(Color.parseColor("#F00020"));
         }
-        else if ((tempsRestant > Math.round(tempsDepart * (1/4))) &&(tempsRestant < Math.round(tempsDepart * (2/4)))||(tempsRestant <=4)||(prio==2))
+        else if ((tempsRestant > Math.round(tempsDepart * (1/4))) &&(tempsRestant < Math.round(tempsDepart * (2/4)))||(tempsRestant <=4))
         {
             tvTitre.setText(uneTask.getTitreT());
             tvTitre.setTextColor(Color.parseColor("#ff7f00"));
             tvDesc.setText(uneTask.getDescT() + " " +tempsRestant+" jours restants");
             tvDesc.setTextColor(Color.parseColor("#ff7f00"));
         }
-        else if ((tempsRestant > Math.round(tempsDepart * (2/4))) &&(tempsRestant < Math.round(tempsDepart * (3/4)))||(tempsRestant <=6)||(prio==3))
+        else if ((tempsRestant > Math.round(tempsDepart * (2/4))) &&(tempsRestant < Math.round(tempsDepart * (3/4)))||(tempsRestant <=6))
         {
             tvTitre.setText(uneTask.getTitreT());
             tvTitre.setTextColor(Color.parseColor("#ffff00"));
             tvDesc.setText(uneTask.getDescT() + " " +tempsRestant+" jours restants");
             tvDesc.setTextColor(Color.parseColor("#ffff00"));
         }
-        else if ((tempsRestant >= Math.round(tempsDepart *(3/4))) && (tempsRestant > 6)||(prio==4))
+        else if ((tempsRestant >= Math.round(tempsDepart *(3/4))) && (tempsRestant > 6))
         {
             tvTitre.setText(uneTask.getTitreT());
             tvTitre.setTextColor(Color.parseColor("#00FF00"));
