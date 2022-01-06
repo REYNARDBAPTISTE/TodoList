@@ -78,4 +78,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Modifier"/>
+    <Button
+        android:id="@+id/btnDeleteTask"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Supprimer la tâche"/>
 </LinearLayout>

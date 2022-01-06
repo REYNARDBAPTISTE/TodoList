@@ -10,7 +10,4 @@
 
     $sql = "UPDATE task SET titreT = '$titre', descT = '$desc', limiteT = '$tempsNew' WHERE idU = '$idU' AND idT = '$idT'";
     $CO->query($sql);
-    $f = fopen('test.txt','a');
-    fwrite($f,$sql);
-    fclose($f);
 ?>

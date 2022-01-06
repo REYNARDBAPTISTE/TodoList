@@ -1,4 +1,4 @@
-Mot de passe oublié
+﻿Mot de passe oublié
 Validation de l'email
 
 Section paramètre (à modifier pour votre compte)
@@ -13,14 +13,5 @@ Ajouter Section sécurité
 Ajouter un section professionel
 	-> Bouton rejoindre un groupe
 	-> Bouton créer un groupe
-
-Section perso
-	-> Afficher les tâches
-
-Section créer une nouvellle tâche
-	-> Entrer un titre
-	-> Entre une description
-	-> Entrer une priorité
-	-> Entrer une temps limite
 
 PROBLEME DOUBLE CLIQUE

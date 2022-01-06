@@ -3,6 +3,8 @@ package com.example.todolist;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -26,6 +28,7 @@ public class Modif_task extends AppCompatActivity {
     private TextView etDesc;
     private TextView etDate;
     private Button btnModifier;
+    private Button btnDeleteTask;
     private StringRequest stringRequest;
     private RequestQueue requestQueue;
     @Override
@@ -34,6 +37,7 @@ public class Modif_task extends AppCompatActivity {
         setContentView(R.layout.activity_modif_task);
         Intent intent = getIntent();
         btnModifier = (Button) findViewById(R.id.btnModifierTask);
+        btnDeleteTask = (Button) findViewById(R.id.btnDeleteTask);
         etTitre = (TextView) findViewById(R.id.etTitreM);
         etTitre.setText(intent.getStringExtra("titre"));
         etDesc = (TextView) findViewById(R.id.etDescM);
@@ -53,6 +57,12 @@ public class Modif_task extends AppCompatActivity {
                 int tempsnew = temps + saisie;
                 Modif(etTitre.getText().toString(),etDesc.getText().toString(),tempsnew,idT,idU);
                 Startactivity();
+            }
+        });
+        btnDeleteTask.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showSimpleDialog(v,idT,idU);
             }
         });
     }
@@ -88,5 +98,53 @@ public class Modif_task extends AppCompatActivity {
         };
         requestQueue = Volley.newRequestQueue(Modif_task.this);
         requestQueue.add(stringRequest);
+    }
+    public void DeleteTask(int idT, int idU){
+        stringRequest = new StringRequest(Request.Method.POST, DBPages.task_delete_url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                start();
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        })
+        {
+            @Nullable
+            @Override
+            protected Map<String, String> getParams(){
+                Map<String,String> params = new HashMap<>();
+                params.put("idT",String.valueOf(idT));
+                params.put("idU",String.valueOf(idU));
+                return params;
+            }
+        };
+        requestQueue = Volley.newRequestQueue(Modif_task.this);
+        requestQueue.add(stringRequest);
+    }
+    public void showSimpleDialog(View view, int idU, int idT) {
+        // Use the Builder class for convenient dialog construction
+        AlertDialog.Builder builder = new AlertDialog.Builder(Modif_task.this);
+        builder.setCancelable(false);
+        builder.setTitle("Supprimer l'utilisateur ?");
+        builder.setPositiveButton("Confirmer", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int id) {
+                DeleteTask(idU, idT);
+            }
+        })
+                .setNegativeButton("Annuler ", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                    }
+                });
+        builder.create().show();
+    }
+    public void start(){
+        Intent intent = new Intent(this,TaskpersoActivity.class);
+        startActivity(intent);
+        finish();
     }
 }
