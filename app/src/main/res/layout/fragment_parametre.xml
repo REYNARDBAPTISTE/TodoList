@@ -7,10 +7,22 @@
     android:orientation="vertical"
     tools:context=".ui.home.HomeFragment">
 
-    <Button
-        android:id="@+id/btnPerso"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Perso"/>
+        android:orientation="horizontal"
+        android:padding="110sp"
+        android:layout_marginTop="100sp">
+    <ImageButton
+        android:id="@+id/btnPerso"
+        android:src="@drawable/avatar_login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
 
+        <ImageButton
+            android:id="@+id/btnGroup"
+            android:src="@drawable/group_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+</LinearLayout>
 </LinearLayout>

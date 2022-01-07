@@ -5,8 +5,12 @@
       <map>
         <entry key="..\:/Users/reynard/AndroidStudioProjects/TodoList/app/src/main/res/layout/activity_main.xml" value="0.28804347826086957" />
         <entry key="..\:/Users/reynard/AndroidStudioProjects/TodoList/app/src/main/res/layout/activity_modif_task.xml" value="0.2046875" />
+        <entry key="..\:/Users/reynard/AndroidStudioProjects/TodoList/app/src/main/res/layout/activity_navigation.xml" value="0.20520833333333333" />
         <entry key="..\:/Users/reynard/AndroidStudioProjects/TodoList/app/src/main/res/layout/activity_register.xml" value="0.2046875" />
+        <entry key="..\:/Users/reynard/AndroidStudioProjects/TodoList/app/src/main/res/layout/activity_taskperso.xml" value="0.20520833333333333" />
         <entry key="..\:/Users/reynard/AndroidStudioProjects/TodoList/app/src/main/res/layout/create_task.xml" value="0.20520833333333333" />
+        <entry key="..\:/Users/reynard/AndroidStudioProjects/TodoList/app/src/main/res/layout/fragment_gallery.xml" value="0.20520833333333333" />
+        <entry key="..\:/Users/reynard/AndroidStudioProjects/TodoList/app/src/main/res/layout/fragment_parametre.xml" value="0.20520833333333333" />
       </map>
     </option>
   </component>

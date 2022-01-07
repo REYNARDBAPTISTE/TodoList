@@ -31,8 +31,3 @@ if (!empty($message_erreur))
 else
     echo json_encode($result);
 ?>
-<!--<form method=POST>
-    <input type=text name=login>
-    <input type=password name=pwd>
-    <button type=submit>valider</button>
-</form>-->
