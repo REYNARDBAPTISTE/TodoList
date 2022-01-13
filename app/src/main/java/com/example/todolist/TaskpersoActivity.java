@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -34,7 +35,7 @@ public class TaskpersoActivity extends AppCompatActivity {
     private ArrayList<Users> listeUser;
     private ListView lvTask;
     private DBManager dbm;
-    private Button btnCreateTask;
+    private ImageButton btnCreateTask;
     private StringRequest stringRequest;
     private RequestQueue requestQueue2;
     @Override
@@ -46,7 +47,7 @@ public class TaskpersoActivity extends AppCompatActivity {
         listeTasks = new ArrayList<Tasks>();
         dbm = new DBManager(this);
         lvTask = (ListView) findViewById(R.id.lvTask);
-        btnCreateTask = (Button) findViewById(R.id.btnCreateTask);
+        btnCreateTask = (ImageButton) findViewById(R.id.btnCreateTask);
 
         btnCreateTask.setOnClickListener(new View.OnClickListener() {
             @Override

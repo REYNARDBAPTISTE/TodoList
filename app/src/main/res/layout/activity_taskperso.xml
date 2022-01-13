@@ -12,12 +12,11 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <Button
+        <ImageButton
             android:id="@+id/btnCreateTask"
+            android:src="@drawable/add_icon"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="Créer une nouvelle tâche" />
+            android:layout_height="wrap_content"/>
 
     </LinearLayout>
 

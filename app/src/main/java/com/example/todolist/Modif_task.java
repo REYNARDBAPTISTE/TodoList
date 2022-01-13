@@ -62,7 +62,7 @@ public class Modif_task extends AppCompatActivity {
         btnDeleteTask.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showSimpleDialog(v,idT,idU);
+                DeleteTask(idT,idU);
             }
         });
     }

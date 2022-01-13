@@ -19,6 +19,3 @@
     }
     echo json_encode($result);
 ?>
-<form method = POST>
-    <input name = idU>
-</form>
