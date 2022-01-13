@@ -5,7 +5,9 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -31,11 +33,19 @@ private FragmentParametreBinding binding;
     View root = binding.getRoot();
 
         Button btnPerso = (Button) root.findViewById(R.id.btnPerso);
+        ListView lvSelecteur = (ListView) root.findViewById(R.id.lvSelecteur);
         //final TextView textView = binding.textHome;
-        btnPerso.setOnClickListener(new View.OnClickListener() {
+        lvSelecteur.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onClick(View view) {
-                startPerso();
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                if (i == 0)
+                {
+                    startPerso();
+                }
+                else
+                    {
+
+                }
             }
         });
         homeViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
