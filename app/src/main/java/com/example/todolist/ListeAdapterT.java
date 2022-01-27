@@ -47,7 +47,7 @@ public class ListeAdapterT extends ArrayAdapter<Tasks> {
         int tempsDepart = uneTask.getTempsR();
         int tempsLimite = uneTask.getLimiteT();
         int tempsActu = Integer.parseInt(formattedDate);
-        int tempsRestant = uneTask.getCalcul();
+        int tempsRestant = tempsLimite - tempsDepart;
         if (tempsRestant <= 2)
         {
             tvTitre.setText(uneTask.getTitreT());
