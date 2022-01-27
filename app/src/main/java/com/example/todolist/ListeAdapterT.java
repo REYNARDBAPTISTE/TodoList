@@ -33,7 +33,7 @@ public class ListeAdapterT extends ArrayAdapter<Tasks> {
         if (view==null)
         {
             LayoutInflater layoutInflater = (LayoutInflater) this.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            view = layoutInflater.inflate(R.layout.activity_group_design,parent,false);
+            view = layoutInflater.inflate(R.layout.tasks_design,parent,false);
         }
         else{
             view = convertView;
@@ -41,6 +41,48 @@ public class ListeAdapterT extends ArrayAdapter<Tasks> {
         uneTask = getItem(position);
         TextView tvTitre = (TextView) view.findViewById(R.id.tvTitreTask);
         TextView tvDesc = (TextView) view.findViewById(R.id.tvDescTask);
+        Date currentTime = Calendar.getInstance().getTime();
+        SimpleDateFormat df = new SimpleDateFormat("DD");
+        String formattedDate = df.format(currentTime);
+        int tempsDepart = uneTask.getTempsR();
+        int tempsLimite = uneTask.getLimiteT();
+        int tempsActu = Integer.parseInt(formattedDate);
+        int tempsRestant = uneTask.getCalcul();
+        if (tempsRestant <= 2)
+        {
+            tvTitre.setText(uneTask.getTitreT());
+            tvTitre.setTextColor(Color.parseColor("#F00020"));
+            tvDesc.setText(uneTask.getDescT() + " " +tempsRestant+" jours restants");
+            tvDesc.setTextColor(Color.parseColor("#F00020"));
+        }
+        else if (tempsRestant <= Math.round(tempsDepart * (1/4)))
+        {
+            tvTitre.setText(uneTask.getTitreT());
+            tvTitre.setTextColor(Color.parseColor("#F00020"));
+            tvDesc.setText(uneTask.getDescT() + " " +tempsRestant+" jours restants");
+            tvDesc.setTextColor(Color.parseColor("#F00020"));
+        }
+        else if ((tempsRestant > Math.round(tempsDepart * (1/4))) &&(tempsRestant < Math.round(tempsDepart * (2/4)))||(tempsRestant <=4))
+        {
+            tvTitre.setText(uneTask.getTitreT());
+            tvTitre.setTextColor(Color.parseColor("#ff7f00"));
+            tvDesc.setText(uneTask.getDescT() + " " +tempsRestant+" jours restants");
+            tvDesc.setTextColor(Color.parseColor("#ff7f00"));
+        }
+        else if ((tempsRestant > Math.round(tempsDepart * (2/4))) &&(tempsRestant < Math.round(tempsDepart * (3/4)))||(tempsRestant <=6))
+        {
+            tvTitre.setText(uneTask.getTitreT());
+            tvTitre.setTextColor(Color.parseColor("#ffff00"));
+            tvDesc.setText(uneTask.getDescT() + " " +tempsRestant+" jours restants");
+            tvDesc.setTextColor(Color.parseColor("#ffff00"));
+        }
+        else if ((tempsRestant >= Math.round(tempsDepart *(3/4))) && (tempsRestant > 6))
+        {
+            tvTitre.setText(uneTask.getTitreT());
+            tvTitre.setTextColor(Color.parseColor("#00FF00"));
+            tvDesc.setText(uneTask.getDescT() + " " +tempsRestant+" jours restants");
+            tvDesc.setTextColor(Color.parseColor("#00FF00"));
+        }
         return view;
     }
 }

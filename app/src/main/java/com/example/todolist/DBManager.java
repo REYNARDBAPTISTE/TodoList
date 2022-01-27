@@ -38,7 +38,7 @@ public class DBManager extends SQLiteOpenHelper {
         this.onCreate(db);
     }
 
-    public void TaskAdd(int idT, String titreT,String descT,int creationT, int limiteT,int idU) {
+    public void TaskAdd(int idT, String titreT, String descT, int creationT, int limiteT, int idU, int calcul) {
         String sqlTA = "INSERT INTO Task (idT,titreT,descT,creationT,limiteT,idU) VALUES ("+idT+",'"+titreT+"','"+descT+"',"+creationT+","+limiteT+","+idU+")";
         this.getWritableDatabase().execSQL(sqlTA);
     }

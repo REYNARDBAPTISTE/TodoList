@@ -94,7 +94,8 @@ public class TaskpersoActivity extends AppCompatActivity {
                     for (int i = 0; i < response.length(); i++) {
                         JSONObject object = j.getJSONObject(i);
                         Tasks uneTask = new Tasks(object.getInt("idT"), object.getString("titreT"), object.getString("descT"),object.getInt("creationT"), object.getInt("limiteT"),object.getInt("idU"));
-                        dbm.TaskAdd(uneTask.idT, uneTask.titreT, uneTask.descT, uneTask.tempsR,uneTask.limiteT,uneTask.idU);
+                        int calcul = uneTask.getTempsR() - uneTask.getLimiteT();
+                        dbm.TaskAdd(uneTask.idT, uneTask.titreT, uneTask.descT, uneTask.tempsR,uneTask.limiteT,uneTask.idU,uneTask.calcul);
                         listeTasks.add(uneTask);
                     }
                 } catch (JSONException e) {
