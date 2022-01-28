@@ -44,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         dbm = new DBManager(this);
+        dbm.dU();
         // SI UTILISATEUR DEJA CONNECTE ALORS STARTACTIVITY
         etEmail = (EditText) findViewById(R.id.etLogin);
         etPassword = (EditText) findViewById(R.id.etpassword);

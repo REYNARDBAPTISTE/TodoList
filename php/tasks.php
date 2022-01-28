@@ -2,7 +2,6 @@
     include "connexion.php";
 
     $idU = $CO->real_escape_string($_POST['idU']);
-    $idU = 16;
     $sql = "SELECT * from task WHERE idU ='$idU' ORDER BY (limiteT-creationT)";
     $rs_task = $CO->query($sql) or die($CO->error . "dans la requête $sql");
     $result = array();

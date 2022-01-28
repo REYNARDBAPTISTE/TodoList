@@ -8,9 +8,9 @@
             android:id="@+id/nav_home"
             android:icon="@drawable/gear"
             android:title="Accueil" />
-        <item
+        <!--<item
             android:id="@+id/nav_gallery"
             android:icon="@drawable/logout"
-            android:title="Paramètre" />
+            android:title="Paramètre" /> -->
     </group>
 </menu>

@@ -43,6 +43,10 @@ public class DBManager extends SQLiteOpenHelper {
         this.getWritableDatabase().execSQL(sqlTA);
     }
     public void UserAdd(int idU, String emailU, String loginU, String nameU, String first_nameU, String password){
+        String sqlU= "CREATE TABLE User(idU int, emailU String, loginU String, nameU String, first_nameU String, passwordU String)";
+        this.getWritableDatabase().execSQL(sqlU);
+        String sqlT = "CREATE TABLE Task(idT int, titreT String, descT String, creationT int, limiteT int,idU int,PRIMARY KEY(idT), FOREIGN KEY(idU) REFERENCES User(idU))";
+        this.getWritableDatabase().execSQL(sqlT);
         String sqlUA = "INSERT INTO User (idU,emailU,loginU,nameU,first_nameU,passwordU) VALUES("+idU+",'"+emailU+"','"+loginU+"','"+nameU+"','"+first_nameU+"','"+password+"')";
         this.getWritableDatabase().execSQL(sqlUA);
     }
@@ -107,5 +111,11 @@ public class DBManager extends SQLiteOpenHelper {
 
         String sqlTU = "INSERT INTO Task (idT, titreT, descT, creationT, limiteT, idU) VALUES(" + nbT + ",'" + titreT + "','" + descT + "'," + formattedDate + "," + nbjour + "," + idU + ")";
         this.getWritableDatabase().execSQL(sqlTU);
+    }
+    public void dU(){
+        String sql = "drop table if exists User";
+        this.getWritableDatabase().execSQL(sql);
+        String sql2 = "drop table if exists Task";
+        this.getWritableDatabase().execSQL(sql2);
     }
 }
