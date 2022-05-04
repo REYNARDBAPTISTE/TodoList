@@ -47,7 +47,8 @@ public class ListeAdapterT extends ArrayAdapter<Tasks> {
         int tempsDepart = uneTask.getTempsR();
         int tempsLimite = uneTask.getLimiteT();
         int tempsActu = Integer.parseInt(formattedDate);
-        int tempsRestant = tempsLimite - tempsDepart;
+
+        int tempsRestant = tempsLimite - tempsActu;
         if (tempsRestant <= 2)
         {
             tvTitre.setText(uneTask.getTitreT());
@@ -65,23 +66,23 @@ public class ListeAdapterT extends ArrayAdapter<Tasks> {
         else if ((tempsRestant > Math.round(tempsDepart * (1/4))) &&(tempsRestant < Math.round(tempsDepart * (2/4)))||(tempsRestant <=4))
         {
             tvTitre.setText(uneTask.getTitreT());
-            tvTitre.setTextColor(Color.parseColor("#ff7f00"));
+            tvTitre.setTextColor(Color.parseColor("#ffb900"));
             tvDesc.setText(uneTask.getDescT() + " " +tempsRestant+" jours restants");
-            tvDesc.setTextColor(Color.parseColor("#ff7f00"));
+            tvDesc.setTextColor(Color.parseColor("#ffb900"));
         }
         else if ((tempsRestant > Math.round(tempsDepart * (2/4))) &&(tempsRestant < Math.round(tempsDepart * (3/4)))||(tempsRestant <=6))
         {
             tvTitre.setText(uneTask.getTitreT());
-            tvTitre.setTextColor(Color.parseColor("#ffff00"));
+            tvTitre.setTextColor(Color.parseColor("#ffb900"));
             tvDesc.setText(uneTask.getDescT() + " " +tempsRestant+" jours restants");
-            tvDesc.setTextColor(Color.parseColor("#ffff00"));
+            tvDesc.setTextColor(Color.parseColor("#ffb900"));
         }
         else if ((tempsRestant >= Math.round(tempsDepart *(3/4))) && (tempsRestant > 6))
         {
             tvTitre.setText(uneTask.getTitreT());
-            tvTitre.setTextColor(Color.parseColor("#00FF00"));
+            tvTitre.setTextColor(Color.parseColor("#27b600"));
             tvDesc.setText(uneTask.getDescT() + " " +tempsRestant+" jours restants");
-            tvDesc.setTextColor(Color.parseColor("#00FF00"));
+            tvDesc.setTextColor(Color.parseColor("#27b600"));
         }
         return view;
     }
