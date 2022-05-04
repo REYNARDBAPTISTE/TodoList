@@ -50,13 +50,9 @@ public class MainActivity extends AppCompatActivity {
         etPassword = (EditText) findViewById(R.id.etpassword);
         Button btnInscription = (Button) findViewById(R.id.btnInscription);
         Button btnConnexion = (Button) findViewById(R.id.btnConnexion);
-        Button btnMdpOublie = (Button) findViewById(R.id.btnMdpOublie);
 
         btnInscription.setBackgroundColor(Color.GRAY);
         btnConnexion.setBackgroundColor(Color.BLUE);
-        btnMdpOublie.setBackgroundColor(Color.WHITE);
-        btnMdpOublie.setTextColor(Color.BLACK);
-        btnMdpOublie.setOutlineSpotShadowColor(Color.WHITE);
         //dbm.DropUser();
         // PAGE D'INSCRIPTION
         btnInscription.setOnClickListener(new View.OnClickListener() {
